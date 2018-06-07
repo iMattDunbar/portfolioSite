@@ -14,6 +14,7 @@ class HomeController extends Controller
 {
     private $logger;
     public $placesArray = array();
+    public $responseArray = array('nextPageToken' => null, 'zipCode' => null);
     public $zipCode = "";
     public $geocodeAPIKey = "AIzaSyDAuY7X8QMRsNzsQyDSsRZZY4dfFMldC1Q";
     public $placesAPIKey = "AIzaSyB3kwqSnpj8zAj7LjyYZxqO0pUWZfsmiXY";
@@ -42,26 +43,48 @@ class HomeController extends Controller
 
         $lat = isset($params['latitude']) ? $params['latitude'] : null;
         $lng = isset($params['longitude']) ? $params['longitude'] : null;
+        $zipCode = isset($params['zipCode']) ? $params['zipCode'] : null;
+        $nextPageToken = isset($params['nextPageToken']) ? $params['nextPageToken'] : null;
 
         if ($lat == null || $lng == null) {
             return new JsonResponse(['error' => 'Invalid latitude and longitude.'], 409);
         }
         else {
-            //Form Request URL
-            $requestURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=LAT_REPLACE,LNG_REPLACE&key=KEY_REPLACE";
-            $requestURL = str_replace("LAT_REPLACE", $lat, $requestURL);
-            $requestURL = str_replace("LNG_REPLACE", $lng, $requestURL);
-            $requestURL = str_replace("KEY_REPLACE", $this->geocodeAPIKey, $requestURL);
 
-            //Get zip code and form new places request url
-            $requestURL = $this->getZipRequest($requestURL);
+            $requestURL = "";
+            if ($zipCode == null) {
+                //First request, get the zip and then do places request
+                $requestURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=LAT_REPLACE,LNG_REPLACE&key=KEY_REPLACE";
+                $requestURL = str_replace("LAT_REPLACE", $lat, $requestURL);
+                $requestURL = str_replace("LNG_REPLACE", $lng, $requestURL);
+                $requestURL = str_replace("KEY_REPLACE", $this->geocodeAPIKey, $requestURL);
+                $requestURL = $this->getZipRequest($requestURL);
+                $this->doPlacesRequest($requestURL);
+            }
+            else {
+                //We have the zip code, get the next page token as well and do places request
+                if ($nextPageToken != null) {
+                    $nextPageURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=TOKEN_REPLACE&query=restaurants+in+ZIP_REPLACE&key=KEY_REPLACE";
+                    $nextPageURL = str_replace("TOKEN_REPLACE", $nextPageToken, $nextPageURL);
+                    $nextPageURL = str_replace("ZIP_REPLACE", $this->zipCode, $nextPageURL);
+                    $nextPageURL = str_replace("KEY_REPLACE", $this->placesAPIKey, $nextPageURL);
+                    $this->doPlacesRequest($nextPageURL);
+                }
+                else {
+                    //If it's null, there's no more places to get
+                    return new JsonResponse(['error' => 'No more places to get.'], 420);
+                }
+            }
 
-            $this->doPlacesRequest($requestURL);
+
         }
 
 
         //return new JsonResponse(['count' => count($this->placesArray)]);
-        return new JsonResponse($this->placesArray);
+        $this->logger->info(count($this->placesArray));
+
+        $this->responseArray['results'] = $this->placesArray;
+        return new JsonResponse($this->responseArray);
 
     }
 
@@ -80,6 +103,11 @@ class HomeController extends Controller
                         for ($j = 0; $j < count($types); $j++) {
                             if (strcmp($types[$j],'postal_code') == 0) {
                                 $this->zipCode = $addressComponents[$i]->long_name;
+
+                                //Add zipCode to response
+                                $this->responseArray['zipCode'] = $this->zipCode;
+
+                                break;
                             }
                         }
                     }
@@ -118,19 +146,8 @@ class HomeController extends Controller
         //If there's a next page token, form a new request with the new page and run this function again
         //to parse more results
         if (isset($response->next_page_token)) {
-
             $nextPageToken = $response->next_page_token;
-
-            $nextPageURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=TOKEN_REPLACE&query=restaurants+in+ZIP_REPLACE&key=KEY_REPLACE";
-            $nextPageURL = str_replace("TOKEN_REPLACE", $nextPageToken, $nextPageURL);
-            $nextPageURL = str_replace("ZIP_REPLACE", $this->zipCode, $nextPageURL);
-            $nextPageURL = str_replace("KEY_REPLACE", $this->placesAPIKey, $nextPageURL);
-
-
-            //Wait, Google Places API doesn't let us request <2s after our last request
-            sleep(2.1);
-
-            $this->doPlacesRequest($nextPageURL);
+            $this->responseArray['nextPageToken'] = $nextPageToken;
         }
 
     }
@@ -143,7 +160,13 @@ class HomeController extends Controller
             $place['latitude'] = isset($result->geometry->location->lat) ? $result->geometry->location->lat : null;
             $place['longitude'] = isset($result->geometry->location->lng) ? $result->geometry->location->lng : null;
             $place['name'] = isset($result->name) ? $result->name : null;
-            $place['open'] = isset($result->opening_hours) ? $result->opening_hours->open_now : null;
+
+            if (isset($result->opening_hours)) {
+                if (isset($result->opening_hours->open_now)) {
+                    $place['open'] = $result->opening_hours->open_now;
+                } else { $place['open'] = null; }
+            } else { $place['open'] = null; }
+
             $place['rating'] = isset($result->rating) ? $result->rating : null;
 
             if (isset($result->photos)) {
