@@ -20,11 +20,19 @@ class HomeController extends Controller
     public $placesAPIKey = "AIzaSyB3kwqSnpj8zAj7LjyYZxqO0pUWZfsmiXY";
 
     /**
-     * @Route("/", name="Home")
+     * @Route("/", name="Matt Dunbar")
      */
     public function index()
     {
         return $this->render('home/index.html.twig');
+    }
+
+    /**
+     * @Route("/resume", name="Resume")
+     */
+    public function resume()
+    {
+        return $this->redirect('http://www.mattdunbar.io/Resume.pdf');
     }
 
     /**
@@ -36,7 +44,7 @@ class HomeController extends Controller
         //Get Latitude/Longitude from JSON payload
         $payload = $request->getContent();
         if (empty($payload)) {
-            return new JsonResponse(['error' => 'Payload not in correct format.'], 409);
+            return new JsonResponse(['error' => 'You tryna peep my API dawg?'], 409);
         }
 
         $params = json_decode($payload, true);
@@ -50,8 +58,6 @@ class HomeController extends Controller
             return new JsonResponse(['error' => 'Invalid latitude and longitude.'], 409);
         }
         else {
-
-            $requestURL = "";
             if ($zipCode == null) {
                 //First request, get the zip and then do places request
                 $requestURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=LAT_REPLACE,LNG_REPLACE&key=KEY_REPLACE";
@@ -64,6 +70,9 @@ class HomeController extends Controller
             else {
                 //We have the zip code, get the next page token as well and do places request
                 if ($nextPageToken != null) {
+
+                    //Go ahead and set zip code again
+                    $this->responseArray['zipCode'] = $zipCode;
                     $nextPageURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=TOKEN_REPLACE&query=restaurants+in+ZIP_REPLACE&key=KEY_REPLACE";
                     $nextPageURL = str_replace("TOKEN_REPLACE", $nextPageToken, $nextPageURL);
                     $nextPageURL = str_replace("ZIP_REPLACE", $this->zipCode, $nextPageURL);
@@ -75,8 +84,6 @@ class HomeController extends Controller
                     return new JsonResponse(['error' => 'No more places to get.'], 420);
                 }
             }
-
-
         }
 
 
@@ -130,9 +137,6 @@ class HomeController extends Controller
     }
 
     public function doPlacesRequest($requestURL) {
-
-        //dump($response);
-        //throw new Exception('blah');
 
         //Get JSON response from Google Places
         $response = json_decode(file_get_contents($requestURL));
