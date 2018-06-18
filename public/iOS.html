@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>iOS Experience</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+
+		<!-- Fav Icon -->
+		<link rel="icon" href="http://mattdunbar.io/favicon.ico">
+
+	</head>
+	<body>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div id="TheLogo">
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+					<!-- Menu -->
+                    <nav id="menu">
+                        <h2>Menu</h2>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="Blog.html">Blog</a></li>
+                            <li><a href="iOS.html">iOS Experience</a></li>
+                            <li><a href="Android.html">Android Experience</a></li>
+                            <li><a href="Resume.pdf">Resume</a></li>
+                        </ul>
+                    </nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<div class="inner">
+							<span class="image left"><img src="images/legends.jpg" alt="" /></span>
+							<h1> AR Card Finding Game </h1>
+							<p>
+								For my employer Gamifi, I built an AR Card Finding game for a local single A baseball team in Lexington, KY <b>using ARKit</b>. It hits a RESTful API that returns the images URLs, locations, titles, descriptions, etc of all the cards that can be found in the game. From there, you have to walk around their stadium and try and find them all. The phone will vibrate 3 times if you are near the card, and then if you are within the location range it adds the card (or node in ARKit terms) to the screen. Once you collect them all, you get a reward from the stadium like a free drink, ticket, or whatever they feel like giving away.
+
+								<br>
+								<br>
+								The app also features a custom collection view to scroll through the cards you have collected that organizes itself based on the tags that are given in the API like "Opening Day" or "Exclusive Pack". <b> Prior to the release of the app, we had to walk around the stadium and record latitude/longitude values, tag specific locations, and record location accuracy. I also wrote the mobile client (in Java/Android) that did this and gave these values to the API</b>.
+
+								<br>
+								<br>
+								At the time of writing this, the app is not yet published to the App Store because it doesn't release until opening day of the ball park, but when it is I will come back and update my page with a link to it!
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+
+							</p>
+						</div>
+
+						<div class="inner">
+							<span class="image left"><img src="images/private_cocoapods.png" alt="" /></span>
+							<h1> Private Cocoapods </h1>
+							<p>
+								The day I found out about Cocoapods in iOS projects was one of the better days of my life. The day I got to create a private repo for my employer was an even better day. I head up the maintenance of all of our pods so far and have been enjoying every second of it.
+
+								<br>
+								<br>
+								It's not that difficult to create a private Cocoapod repo, I use <a href="https://about.gitlab.com/"> Gitlab </a> (sorry Github) at my employer to manage our private Cocoapods. By creating a Gitlab repo to host the podspecs and adding that same repo to your pod sources, it's pretty much plug and play... Creating the pods however, is a different story.
+
+								<br>
+								<br>
+							<center>
+
+								<div class="6u 12u$(medium)">
+									<b>Some of the libraries I have built so far</b>
+									<ul>
+										<li> A full RESTful API wrapper that makes it possible to integrate basic/key features with error checking and pre-defined routes and helper functions. </li>
+										<li>Custom Ad Banners for customers that can be automatically implemented by placing them into Fragments of either small bottom screen height or the entire screen by giving the object an image and destination URL.</li>
+										<li>A very easily implemented calendar view for iOS (since Apple doesn't include one by default...) that can be populated with a minimal amount of work and presented from any view controller. </li>
+									</ul>
+								</div>
+
+							</center>
+							</p>
+						</div>
+
+						<div class="inner">
+							<span class="image left"><img src="images/grubby.png" alt="" /></span>
+							<h1> Grubby </h1>
+							<p>
+								Grubby is an app I decided to make because sometimes choosing a place to eat is hard, especially in a location you're unfamiliar with or even if it's a familiar location and you're looking for something new. It can be viewed in the App Store <a href="https://itunes.apple.com/us/app/grubby/id1347756821?mt=8"> at this link. </a>
+								<br>
+								<br>
+								Basically what the app does is call the <a href="https://developers.google.com/maps/documentation/geocoding/start">Google Geocode RESTful API </a> with the users current location latitude and longitude, parses it, finds the users zip code and then calls the <a href="https://developers.google.com/places/web-service/search">Google Places RESTful API</a> to search for places to eat, and shuffles through them. The app is done completely in Swift with the Alamofire library used for network requests and image downloading, JSON parsing was done with the native Swift 4 Codables.
+							</p>
+						</div>
+
+
+						<div class="inner">
+							<span class="image left"><img src="images/omitted-web.png" alt="" /></span>
+							<h1> Omitted </h1>
+							<p>
+
+								Omitted is a side project I decided to do because I love the craziness level of the <b> random words that come from Urban Dictionary </b>, so I decided to make a little drinking game out of it on both platforms. The app is built with Alamofire handling the network requests and JSON responses and with Google's <a href="http://www.material.io">material design components</a>. The entire source code for iOS can be viewed on Github <a href="https://github.com/iMattDunbar/omitted-ios"> at this link. </a>
+							</p>
+						</div>
+
+						<div class="inner">
+							<span class="image left"><img src="images/alicenter.png" alt="" /></span>
+							<h1> Hours Against Hate </h1>
+							<p>
+
+								Hours Against Hate is a multiplayer game app that was developed for the Muhammad Ali Center that promotes knowledge about diversity and other cultures. It can be viewed in the App Store <a href="https://itunes.apple.com/us/app/hours-against-hate/id1286735250?mt=8"> at this link. </a>
+								<br>
+								<br>
+								This app is one of my favorites I have ever worked on, mostly because all of the views were made and coded by me. I also implemented the JSON handling from the RESTful API using Swift 4's new JSON parsing with encodable and decodable object types.
+
+
+							</p>
+						</div>
+
+						<div class="inner">
+							<span class="image left"><img src="images/xooker.png" alt="" /></span>
+							<h1> Xooker </h1>
+							<p>
+								Xooker is a deals and rewards app that you can earn money and coupons through playing the games that are included in the app. It can be viewed in the App Store <a href="https://itunes.apple.com/us/app/xooker/id983457467?mt=8"> at this link. </a> At the time of writing this blurb, the company I currently work for was contracted to do the iOS and Android app work for this app.
+
+								<center>
+
+									<div class="6u 12u$(medium)">
+										<b>The majority of the app was not coded by me, but here's some of the main featured I helped implement in iOS</b>
+										<ul>
+											<li> Numerous RESTful API calls, handling of the JSON responses. </li>
+											<li>Custom Ad Overlay over the original Google Ad Mob for targeted ads.</li>
+											<li>Custom game banner overlay that spans the top of the game images dynamically.</li>
+											<li>The Loyalty Card punch and rewards flow.</li>
+										</ul>
+									</div>
+
+								</center>
+
+							</p>
+						</div>
+
+
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

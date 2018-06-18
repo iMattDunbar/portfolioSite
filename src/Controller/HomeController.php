@@ -24,7 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return $this->render('home/index.html.twig');
+        //Return template index page
+        //return $this->render('home/index.html.twig');
+
+        //return new Response(file_get_contents('index.html'));
+        return $this->redirect('index.html');
+
     }
 
     /**
@@ -32,7 +37,8 @@ class HomeController extends Controller
      */
     public function resume()
     {
-        return $this->redirect('http://www.mattdunbar.io/Resume.pdf');
+        return $this->redirect('Resume.pdf');
+        //return new Response(file_get_contents('Resume.pdf'));
     }
 
     /**
