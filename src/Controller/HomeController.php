@@ -22,13 +22,15 @@ class HomeController extends Controller
     /**
      * @Route("/", name="Matt Dunbar")
      */
-    public function index()
+    public function index(Request $request)
     {
         //Return template index page
         //return $this->render('home/index.html.twig');
 
         //return new Response(file_get_contents('index.html'));
-        return $this->redirect('index.html');
+        //return $this->redirect('index.html');
+
+        return $this->grubby($request);
 
     }
 
@@ -42,7 +44,7 @@ class HomeController extends Controller
     }
 
     /**
-     * @Route("/grubby", name="Grubby API")
+     * @Route("/", name="Grubby API")
      */
     public function grubby(Request $request) {
 
