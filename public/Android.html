@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Android Experience</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+
+		<!-- Fav Icon -->
+		<link rel="icon" href="favicon.ico">
+
+	</head>
+	<body>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<header id="header">
+					<div id="TheLogo">
+
+						<!-- Nav -->
+						<nav>
+							<ul>
+								<li><a href="#menu">Menu</a></li>
+							</ul>
+						</nav>
+
+					</div>
+				</header>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<h2>Menu</h2>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="Blog.html">Blog</a></li>
+						<li><a href="iOS.html">iOS Experience</a></li>
+						<li><a href="Android.html">Android Experience</a></li>
+						<li><a href="Resume.pdf">Resume</a></li>
+					</ul>
+				</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<div class="inner">
+							<span class="image left"><img src="images/artifactory.png" alt="" /></span>
+							<h1> Private Android Libraries </h1>
+							<p>
+								Instead of using a site like  <a href="https://jitpack.io/">jitpack.io</a> at work for sharing private Android libraries that are used over and over again, I decided to spin up a sort of manual private repository for our Android libraries.
+
+							<br>
+							<br>
+								Using an AWS (Amazon Web Services) instance with an elastic IP installed, I installed the open source version of <a href="https://jfrog.com/open-source/">JFrog Artifactory</a>. After some frustrating setup, my coworkers and I now have a very simple way to update massive amounts of our code in all of our different projects.
+
+								<br>
+								<br>
+							<center>
+
+								<div class="6u 12u$(medium)">
+									<b>Some of the libraries I have built so far</b>
+									<ul>
+										<li> A full RESTful API wrapper that makes it possible to integrate basic/key features with error checking and pre-defined routes and helper functions. </li>
+										<li>Custom Ad Banners for customers that can be automatically implemented by placing them into Fragments of either small bottom screen height or the entire screen by giving the object an image and destination URL.</li>
+										<li>A heatmap framework that records where the user touches and sends it to an API for better understanding user behavior / UI efficiency.</li>
+									</ul>
+								</div>
+
+							</center>
+							</p>
+						</div>
+
+						<div class="inner">
+							<span class="image left"><img src="images/grubby.png" alt="" /></span>
+							<h1> Grubby </h1>
+							<p>
+								Grubby is an app I decided to make because sometimes choosing a place to eat is hard, especially in a location you're unfamiliar with or even if it's a familiar location and you're looking for something new. It can be viewed in the Play Store <a href="https://play.google.com/store/apps/details?id=dunbar.com.grubby"> at this link. </a>
+								<br>
+								<br>
+								Basically what the app does is call the <a href="https://developers.google.com/maps/documentation/geocoding/start">Google Geocode RESTful API </a> with the users current location latitude and longitude, parses it, finds the users zip code and then calls the <a href="https://developers.google.com/places/web-service/search">Google Places RESTful API</a> to search for places to eat, and shuffles through them. All networking is done in Java with RetrofitJSON, Reactive Java/Android (RxJava/RxAndroid) and GSON parsing the JSON responses and Glide to download the images.
+							</p>
+						</div>
+
+						<div class="inner">
+							<span class="image left"><img src="images/omitted-web.png" alt="" /></span>
+							<h1> Omitted </h1>
+							<p>
+								Omitted is a side project I decided to do because I love the craziness level of the <b> random words that come from Urban Dictionary </b>, so I decided to make a little drinking game out of it on both platforms. The app is built with RetrofitJSON, Reactive Java/Android (RxJava/RxAndroid) and GSON handling the network requests. The entire source code for Android can be viewed on Github <a href="https://github.com/iMattDunbar/omitted-android"> at this link. </a>
+							</p>
+						</div>
+
+						<div class="inner">
+							<span class="image left"><img src="images/xooker.png" alt="" /></span>
+							<h1> Xooker </h1>
+							<p>
+								Xooker is a deals and rewards app that you can earn money and coupons through playing the games that are included in the app. It can be viewed in the Google Play Store <a href="https://play.google.com/store/apps/details?id=com.fusioncorp.xooker&hl=en"> at this link. </a> At the time of writing this blurb, the company I currently work for was contracted to do the iOS and Android app work for this app.
+
+							<center>
+
+								<div class="6u 12u$(medium)">
+									<b>The majority of the app was not coded by me, but here's some of the main featured I helped implement in Android</b>
+									<ul>
+										<li> Numerous RESTful API calls, handling of the JSON responses. </li>
+										<li>Custom Ad Overlay over the original Google Ad Mob for targeted ads.</li>
+										<li>Custom game banner overlay that spans the top of the game images dynamically.</li>
+									</ul>
+								</div>
+
+							</center>
+
+							</p>
+						</div>
+
+
+
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,14 +1,22 @@
 {
-  "name": "portfolio-site",
+  "name": "personalsite",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Personal website.",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile:sass": "node-sass assets/css/main.scss assets/css/main.css -w"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iMattDunbar/personalsite.git"
+  },
+  "author": "Matt Dunbar",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iMattDunbar/personalsite/issues"
+  },
+  "homepage": "https://github.com/iMattDunbar/personalsite#readme",
   "dependencies": {
-    "@material/card": "^0.36.0"
+    "node-sass": "^4.9.0"
   }
 }

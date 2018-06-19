@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>The quick and easy guide to using Fragments.</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+
+		<!-- Fav Icon -->
+		<link rel="icon" href="../favicon.ico">
+
+	</head>
+	<body>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div id="TheLogo">
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<h2>Menu</h2>
+							<ul>
+								<li><a href="../index.html">Home</a></li>
+								<li><a href="../Blog.html">Blog</a></li>
+								<li><a href="../iOS.html">iOS Experience</a></li>
+								<li><a href="../Android.html">Android Experience</a></li>
+								<li><a href="http://www.mattdunbar.io/Resume.pdf">Resume</a></li>
+							</ul>
+						</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<center>
+								 <h1> The quick and easy guide to using Fragments. </h1>
+							</center>
+
+							<h3> Why are all the examples I find not straight forward?!</h3>
+							<p>
+								If you're anything like me, you don't read documentation thoroughly unless you absolutely have to. At the very least you might just need a quick code snippet to make something work, and sometimes StackOverflow or some huge blog post is a little much.
+
+								<br>
+								<br>
+
+								<center><h2>So here's the quick and easy way to implement fragments.</h2></center>
+
+							</p>
+
+							<b> Step 1: </b> You need a custom fragment class. Name it whatever you like, just replace "CustomFragment" in the code below.In this onCreateView function you need to initialize elements in your fragment and manipulate them how you want. <br> Ex: Connecting a button and changing the text. <br> <br>
+
+							<b> However, </b> you must use the syntax <code>view.findViewById()</code> referencing the view/XML you just inflated.
+
+							<br>
+							<br>
+
+							<script src="https://gist.github.com/iMattDunbar/d39ab9c79fb4f1f7a8cc7315eacd226d.js"></script>
+
+
+							<br>
+							<br>
+
+							<b> Step 2: </b> You need to place this fragment view somewhere, and in turn you need to give an identifier to the view you're going to be sticking the fragment inside of. In this case the id is "mainContainer". <br> <br>
+							<script src="https://gist.github.com/iMattDunbar/2deba8e9ccb4b0d35adf983c95061c30.js"></script>
+
+							<b> Step 3: </b> Next is the easiest part, in your Activity or even another fragment use the code below to initialize a fragment, start a FragmentTransaction and commit the transaction. If you want the user to be able to press the back button and get back to your original view or activity you sent this from, keep the addToBackStack(null) line, if not, remove it.<br> <br>
+							<script src="https://gist.github.com/iMattDunbar/c694b3e70d5ee6d39d2072b38d229658.js"></script>
+
+							<br>
+							<br>
+							<center> <b> Done! </b> Enjoy using fragments. </center>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/skel.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

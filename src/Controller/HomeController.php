@@ -22,9 +22,16 @@ class HomeController extends Controller
     /**
      * @Route("/", name="Matt Dunbar")
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->render('home/index.html.twig');
+        //Return template index page
+        //return $this->render('home/index.html.twig');
+
+        //return new Response(file_get_contents('index.html'));
+        return $this->redirect('index.html');
+
+        //return $this->grubby($request);
+
     }
 
     /**
@@ -32,7 +39,8 @@ class HomeController extends Controller
      */
     public function resume()
     {
-        return $this->redirect('http://www.mattdunbar.io/Resume.pdf');
+        return $this->redirect('Resume.pdf');
+        //return new Response(file_get_contents('Resume.pdf'));
     }
 
     /**
